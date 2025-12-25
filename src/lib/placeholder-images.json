@@ -1,3 +1,10 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "face-placeholder",
+      "description": "A placeholder image inviting the user to upload a face photo.",
+      "imageUrl": "https://images.unsplash.com/photo-1626470601402-5c6e8b2dc8d7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxhYnN0cmFjdCUyMHBvcnRyYWl0fGVufDB8fHx8MTc2NjYxMTYyMnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "abstract portrait"
+    }
+  ]
 }
