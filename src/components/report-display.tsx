@@ -70,15 +70,14 @@ const ReportDisplay = ({ report, advice, charms, isLoading }: ReportDisplayProps
     return null;
   }
   
-  if (report.includes('氣場干擾嚴重')) {
+  if (report.startsWith('ERROR:')) {
      return (
         <Card className="shadow-lg border-destructive bg-destructive/10">
             <CardHeader>
                 <CardTitle className="text-destructive font-headline text-2xl text-center">Analysis Failed</CardTitle>
             </CardHeader>
             <CardContent className="text-center text-lg text-destructive/90">
-                <p>{report}</p>
-                <p className="mt-2 text-sm">Please try a clearer, front-facing photo.</p>
+                <p>{report.replace('ERROR: ', '')}</p>
             </CardContent>
         </Card>
      )

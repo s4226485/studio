@@ -41,7 +41,7 @@ export default function Home() {
         throw new Error("Failed to generate face reading report.");
       }
       
-      if (reportOutput.report.includes('氣場干擾嚴重')) {
+      if (reportOutput.report.startsWith('ERROR:')) {
         setReport(reportOutput.report);
         setIsLoading(false);
         return;
