@@ -29,7 +29,7 @@ export type GenerateFaceReadingReportInput = z.infer<typeof GenerateFaceReadingR
 const GenerateFaceReadingReportOutputSchema = z.object({
   report: z
     .string()
-    .describe('A detailed face reading report in Markdown format.'),
+    .describe('A detailed face reading report in Markdown format, or an error message prefixed with "ERROR:".'),
 });
 
 export type GenerateFaceReadingReportOutput = z.infer<typeof GenerateFaceReadingReportOutputSchema>;
@@ -72,34 +72,38 @@ First, identify the facial structure:
 - **Black**: A dark Yin Tang indicates impending disaster. Dark ears indicate declining kidney qi. [cite: 996-997]
 
 ---
+**Output Format Rules:**
 
-**Return the analysis in the following Markdown format:**
+1.  **Successful Analysis:** If the image is a clear, front-facing human photo, return the analysis in the following Markdown format:
+    # 🏯 Divine Insight: [Fill in the determined Five-Element Archetype, e.g., Prosperous Earth Type]
 
-# 🏯 Divine Insight: [Fill in the determined Five-Element Archetype, e.g., Prosperous Earth Type]
+    ### 👁 Spirit & Character (Great wealth is in the eyes)
+    (Assess the strength of the spirit in the eyes. If strong, affirm it. If weak or exposed, advise on self-cultivation.)
 
-### 👁 Spirit & Character (Great wealth is in the eyes)
-(Assess the strength of the spirit in the eyes. If strong, affirm it. If weak or exposed, advise on self-cultivation.)
+    ### 💰 Wealth & Career (Minor wealth is in the nose)
+    (Analyze the nose and forehead. Differentiate between primary and speculative wealth. If nostrils are exposed, advise on financial management.)
 
-### 💰 Wealth & Career (Minor wealth is in the nose)
-(Analyze the nose and forehead. Differentiate between primary and speculative wealth. If nostrils are exposed, advise on financial management.)
+    ### ❤️ Relationships & Family (Ask about children at the mouth)
+    (Analyze based on the "ask about children at the mouth" principle and the Marriage Palace. If the mouth is crooked or lips are curled, advise on integrity and communication.)
 
-### ❤️ Relationships & Family (Ask about children at the mouth)
-(Analyze based on the "ask about children at the mouth" principle and the Marriage Palace. If the mouth is crooked or lips are curled, advise on integrity and communication.)
+    ### 🩺 Qi Color & Health (Exclusive Mnemonic)
+    (Based on the photo's qi color, point out potential issues. E.g., Green Shan Gen indicates a cold stomach; a red nose indicates stomach heat. **Disclaimer: This is for folk physiognomy entertainment; please consult a doctor for health concerns.**)
 
-### 🩺 Qi Color & Health (Exclusive Mnemonic)
-(Based on the photo's qi color, point out potential issues. E.g., Green Shan Gen indicates a cold stomach; a red nose indicates stomach heat. **Disclaimer: This is for folk physiognomy entertainment; please consult a doctor for health concerns.**)
+    ### 💡 Master's Auspicious Advice
+    (Provide 3 suggestions based on the analysis:
+    1. Postural advice for the Five-Element type (e.g., Wood types should stand straight).
+    2. Advice on character cultivation (As the mind changes, so does the face; conceal the spirit in the eyes).
+    3. Specific lifestyle advice (e.g., perform good deeds, sleep early to nourish qi).)
 
-### 💡 Master's Auspicious Advice
-(Provide 3 suggestions based on the analysis:
-1. Postural advice for the Five-Element type (e.g., Wood types should stand straight).
-2. Advice on character cultivation (As the mind changes, so does the face; conceal the spirit in the eyes).
-3. Specific lifestyle advice (e.g., perform good deeds, sleep early to nourish qi).)
+2.  **Invalid Image:** If the photo is not a clear, front-facing human photo, or is of poor quality, you MUST return a single line of text with the following exact format:
+    {"report": "ERROR: 氣場干擾嚴重，大師無法感應，請施主上傳清晰照片 (The spiritual connection is weak. Please provide a clear, well-lit, front-facing photo for an accurate reading.)"}
 
-**IMPORTANT NOTE:** If the photo is blurry, not a human face, or of poor quality, please return the following message ONLY, with no other text: "ERROR: 氣場干擾嚴重，大師無法感應，請施主上傳清晰照片 (The spiritual connection is weak. Please provide a clear, well-lit, front-facing photo for an accurate reading.)"
+---
+Analyze the user's uploaded image.
+
+User Upload:
+{{media url=image}}
 `,
-  media: {
-    url: '{{image}}'
-  }
 });
 
 const generateFaceReadingReportFlow = ai.defineFlow(
@@ -109,9 +113,7 @@ const generateFaceReadingReportFlow = ai.defineFlow(
     outputSchema: GenerateFaceReadingReportOutputSchema,
   },
   async input => {
-    const {output} = await prompt({
-      image: input.image,
-    });
-    return {report: output!.report!};
+    const {output} = await prompt(input);
+    return output!;
   }
 );
