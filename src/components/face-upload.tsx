@@ -104,7 +104,7 @@ const FaceUpload = ({ onImageUpload, onAnalyze, isLoading }: FaceUploadProps) =>
                 分析中...
               </>
             ) : (
-              '揭示我的財運'
+              '開始分析'
             )}
           </Button>
         </div>
