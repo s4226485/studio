@@ -95,7 +95,7 @@ First, identify the facial structure:
 2. Advice on character cultivation (As the mind changes, so does the face; conceal the spirit in the eyes).
 3. Specific lifestyle advice (e.g., perform good deeds, sleep early to nourish qi).)
 
-**IMPORTANT NOTE:** If the photo is blurry, not a human face, or of poor quality, please return the following English message ONLY: "ERROR: The spiritual connection is weak. Please provide a clear, well-lit, front-facing photo for an accurate reading."
+**IMPORTANT NOTE:** If the photo is blurry, not a human face, or of poor quality, please return the following message ONLY, with no other text: "ERROR: 氣場干擾嚴重，大師無法感應，請施主上傳清晰照片 (The spiritual connection is weak. Please provide a clear, well-lit, front-facing photo for an accurate reading.)"
 `,
   media: {
     url: '{{image}}'
@@ -115,6 +115,3 @@ const generateFaceReadingReportFlow = ai.defineFlow(
     return {report: output!.report!};
   }
 );
-
-
-
