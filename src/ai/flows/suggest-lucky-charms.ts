@@ -33,12 +33,12 @@ const prompt = ai.definePrompt({
   name: 'suggestLuckyCharmsPrompt',
   input: {schema: SuggestLuckyCharmsInputSchema},
   output: {schema: SuggestLuckyCharmsOutputSchema},
-  prompt: `Based on the following face reading analysis, suggest three lucky charms that can promote positive qualities and improve work-life:
+  prompt: `根據以下的面相分析，建議三種能夠提升正面特質並改善工作與生活的開運物。請務必使用繁體中文進行回覆。
 
-Face Reading Analysis:
+面相分析：
 {{{faceReadingAnalysis}}}
 
-Lucky Charms:`,
+開運物：`,
 });
 
 const suggestLuckyCharmsFlow = ai.defineFlow(

@@ -39,14 +39,14 @@ const prompt = ai.definePrompt({
   name: 'personalizedAdvicePrompt',
   input: {schema: PersonalizedAdviceInputSchema},
   output: {schema: PersonalizedAdviceOutputSchema},
-  prompt: `You are an expert in Chinese face reading and provide personalized advice based on the analysis report.
+  prompt: `您是一位精通中華面相學的專家，並根據分析報告提供個人化建議。
 
-  Based on the following face reading report, provide actionable and personalized advice covering aspects like career, wealth, relationships, and health improvements. The advice should be practical and easy to follow.
+  請根據以下的面相分析報告，提供涵蓋事業、財運、人際關係及健康改善等方面的實用個人化建議。建議應具體且易於遵循。請務必使用繁體中文進行回覆。
 
-  Face Reading Report:
+  面相分析報告：
   {{faceReadingReport}}
 
-  Focus on providing specific recommendations tailored to the individual's unique facial features and characteristics as described in the report.
+  請專注於根據報告中所描述的個人獨特臉部特徵提供量身打造的具體建議。
 `,
 });
 

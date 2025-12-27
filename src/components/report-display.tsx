@@ -49,7 +49,7 @@ const ReportDisplay = ({ report, advice, charms, isLoading }: ReportDisplayProps
         <CardHeader>
           <CardTitle className="flex items-center justify-center gap-2 text-muted-foreground">
             <Loader2 className="h-6 w-6 animate-spin" />
-            <span className="font-headline text-2xl">召喚古老智慧中...</span>
+            <span className="font-headline text-2xl">分析中...</span>
           </CardTitle>
         </CardHeader>
         <CardContent className="p-6 space-y-6">
