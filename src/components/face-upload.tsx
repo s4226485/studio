@@ -75,7 +75,7 @@ const FaceUpload = ({ onImageUpload, onAnalyze, isLoading }: FaceUploadProps) =>
             onChange={onFileSelected}
           />
           {preview ? (
-            <Image src={preview} alt="Face preview" fill style={{ objectFit: 'contain' }} className="rounded-lg" />
+            <Image src={preview} alt="面部預覽" fill style={{ objectFit: 'contain' }} className="rounded-lg" />
           ) : (
             <div className="text-center text-muted-foreground flex flex-col items-center gap-4">
                {placeholder ? (
@@ -90,9 +90,9 @@ const FaceUpload = ({ onImageUpload, onAnalyze, isLoading }: FaceUploadProps) =>
                ) : (
                 <UploadCloud className="h-16 w-16" />
                )}
-              <h3 className="font-headline text-2xl text-foreground">Upload Your Photo</h3>
-              <p>Drag & drop an image here, or click to select a file.</p>
-              <p className="text-xs">(Your image is private and is not stored)</p>
+              <h3 className="font-headline text-2xl text-foreground">上傳您的照片</h3>
+              <p>將圖片拖放到此處，或點擊以選擇檔案。</p>
+              <p className="text-xs">(您的圖片是私密的，不會被儲存)</p>
             </div>
           )}
         </div>
@@ -101,16 +101,16 @@ const FaceUpload = ({ onImageUpload, onAnalyze, isLoading }: FaceUploadProps) =>
             {isLoading ? (
               <>
                 <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                Analyzing...
+                分析中...
               </>
             ) : (
-              'Reveal My Fortune'
+              '揭示我的財運'
             )}
           </Button>
         </div>
         {preview && !isLoading && (
            <div className="text-center mt-4">
-            <Button variant="link" onClick={triggerFileSelect}>Change photo</Button>
+            <Button variant="link" onClick={triggerFileSelect}>更換照片</Button>
            </div>
         )}
       </CardContent>

@@ -49,7 +49,7 @@ const ReportDisplay = ({ report, advice, charms, isLoading }: ReportDisplayProps
         <CardHeader>
           <CardTitle className="flex items-center justify-center gap-2 text-muted-foreground">
             <Loader2 className="h-6 w-6 animate-spin" />
-            <span className="font-headline text-2xl">Summoning Ancient Wisdom...</span>
+            <span className="font-headline text-2xl">召喚古老智慧中...</span>
           </CardTitle>
         </CardHeader>
         <CardContent className="p-6 space-y-6">
@@ -74,7 +74,7 @@ const ReportDisplay = ({ report, advice, charms, isLoading }: ReportDisplayProps
      return (
         <Card className="shadow-lg border-destructive bg-destructive/10">
             <CardHeader>
-                <CardTitle className="text-destructive font-headline text-2xl text-center">Analysis Failed</CardTitle>
+                <CardTitle className="text-destructive font-headline text-2xl text-center">分析失敗</CardTitle>
             </CardHeader>
             <CardContent className="text-center text-lg text-destructive/90">
                 <p>{report.replace('ERROR: ', '')}</p>
@@ -90,15 +90,15 @@ const ReportDisplay = ({ report, advice, charms, isLoading }: ReportDisplayProps
           <TabsList className="grid w-full grid-cols-3 bg-primary/10">
             <TabsTrigger value="report" className="font-headline">
               <ScrollText className="mr-2" />
-              Report
+              報告
             </TabsTrigger>
             <TabsTrigger value="advice" className="font-headline" disabled={!advice}>
               <Lightbulb className="mr-2" />
-              Advice
+              建議
             </TabsTrigger>
             <TabsTrigger value="charms" className="font-headline" disabled={!charms}>
               <Gem className="mr-2" />
-              Lucky Charms
+              開運物
             </TabsTrigger>
           </TabsList>
           
@@ -109,7 +109,7 @@ const ReportDisplay = ({ report, advice, charms, isLoading }: ReportDisplayProps
           <TabsContent value="advice" className="mt-6">
             {advice ? (
               <div className="space-y-4 text-lg">
-                <h3 className="font-headline text-2xl text-primary">Personalized Advice</h3>
+                <h3 className="font-headline text-2xl text-primary">個人化建議</h3>
                 <p className="whitespace-pre-wrap leading-relaxed">{advice}</p>
               </div>
             ) : null}
@@ -118,7 +118,7 @@ const ReportDisplay = ({ report, advice, charms, isLoading }: ReportDisplayProps
           <TabsContent value="charms" className="mt-6">
             {charms ? (
               <div>
-                <h3 className="font-headline text-2xl text-primary mb-4">Your Lucky Charms</h3>
+                <h3 className="font-headline text-2xl text-primary mb-4">您的開運物</h3>
                 <ul className="space-y-3">
                   {charms.map((charm, index) => (
                     <li key={index} className="flex items-center gap-3 p-3 bg-primary/10 rounded-md">

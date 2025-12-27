@@ -23,10 +23,10 @@ const Header: FC = () => {
           <circle cx="12" cy="17" r="1.5" />
         </svg>
         <h1 className="font-headline text-4xl font-bold text-primary">
-          Face Fortune
+          面相財運
         </h1>
       </div>
-      <p className="text-center text-muted-foreground mt-2">Discover your destiny through the ancient art of face reading.</p>
+      <p className="text-center text-muted-foreground mt-2">透過古老的面相學藝術探索您的命運。</p>
     </header>
   );
 };

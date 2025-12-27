@@ -22,8 +22,8 @@ export default function Home() {
   const handleAnalysis = async () => {
     if (!imageData) {
       toast({
-        title: "No Image",
-        description: "Please upload an image first.",
+        title: "沒有圖片",
+        description: "請先上傳圖片。",
         variant: "destructive",
       });
       return;
@@ -38,7 +38,7 @@ export default function Home() {
       // 1. Generate Face Reading Report
       const reportOutput: GenerateFaceReadingReportOutput = await generateFaceReadingReport({ image: imageData });
       if (!reportOutput.report) {
-        throw new Error("Failed to generate face reading report.");
+        throw new Error("無法生成面相報告。");
       }
       
       if (reportOutput.report.startsWith('ERROR:')) {
@@ -57,11 +57,11 @@ export default function Home() {
       setCharms(charmsOutput.luckyCharms);
 
     } catch (error) {
-      console.error("Analysis failed:", error);
-      const errorMessage = error instanceof Error ? error.message : "An unknown error occurred.";
+      console.error("分析失敗:", error);
+      const errorMessage = error instanceof Error ? error.message : "發生未知錯誤。";
       toast({
-        title: "Analysis Failed",
-        description: `Could not analyze the image. ${errorMessage}`,
+        title: "分析失敗",
+        description: `無法分析圖片。 ${errorMessage}`,
         variant: "destructive",
       });
     } finally {
