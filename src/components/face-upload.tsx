@@ -75,11 +75,10 @@ const FaceUpload = ({ onImageUpload, onAnalyze, isLoading }: FaceUploadProps) =>
             <Image src={preview} alt="面部預覽" fill style={{ objectFit: 'contain' }} className="rounded-lg" />
           ) : (
             <div className="text-center text-muted-foreground flex flex-col items-center gap-4">
-              <svg width="100" height="100" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" className="h-24 w-24 text-foreground">
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8c1.66 0 3.2.52 4.47 1.41A7.995 7.995 0 0 0 12 4c-4.41 0-8 3.59-8 8s3.59 8 8 8c4.41 0 8-3.59 8-8 0-1.66-.52-3.2-1.41-4.47A7.995 7.995 0 0 0 20 12c0 4.41-3.59 8-8 8z"/>
-                <path d="M12 4c-1.66 0-3.2.52-4.47 1.41A7.995 7.995 0 0 1 12 12v8c1.66 0 3.2-.52 4.47-1.41A7.995 7.995 0 0 0 12 4z" fill="white"/>
-                <circle cx="12" cy="7" r="1.5" fill="black"/>
-                <circle cx="12" cy="17" r="1.5" fill="white"/>
+              <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 24 24" fill="currentColor" className="h-24 w-24 text-foreground">
+                <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zM12 4a8 8 0 1 1 0 16 4 4 0 0 0 0-8 4 4 0 0 1 0-8z" />
+                <circle cx="12" cy="7" r="1.5" fill="black" />
+                <circle cx="12" cy="17" r="1.5" fill="white" />
               </svg>
               <h3 className="font-headline text-2xl text-foreground">上傳您的照片</h3>
               <p>將圖片拖放到此處，或點擊以選擇檔案。</p>
