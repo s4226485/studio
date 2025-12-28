@@ -9,18 +9,12 @@ const Header: FC = () => {
           width="24"
           height="24"
           viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
+          fill="currentColor"
           className="h-8 w-8 text-primary"
         >
-          <circle cx="12" cy="12" r="10" />
-          <path d="M12 2a7 7 0 1 0 10 10" />
-          <path d="M12 22a7 7 0 1 1-10-10" />
-          <circle cx="12" cy="7" r="1.5" />
-          <circle cx="12" cy="17" r="1.5" />
+          <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zM12 4a8 8 0 1 1 0 16 4 4 0 0 0 0-8 4 4 0 0 1 0-8z" />
+          <circle cx="12" cy="7" r="1.5" fill="black" />
+          <circle cx="12" cy="17" r="1.5" fill="white" />
         </svg>
         <h1 className="font-headline text-4xl font-bold text-primary">
           面相財運
