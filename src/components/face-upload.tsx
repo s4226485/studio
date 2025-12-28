@@ -75,17 +75,6 @@ const FaceUpload = ({ onImageUpload, onAnalyze, isLoading }: FaceUploadProps) =>
             <Image src={preview} alt="面部預覽" fill style={{ objectFit: 'contain' }} className="rounded-lg" />
           ) : (
             <div className="text-center text-muted-foreground flex flex-col items-center gap-4">
-               <svg
-                  viewBox="0 0 512 512"
-                  className="h-40 w-40 text-foreground opacity-20"
-                  fill="currentColor"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <circle cx="256" cy="256" r="256" fill="white" />
-                  <path d="M256,0 A256,256 0 0 0 256,512 Z" />
-                  <circle cx="256" cy="128" r="64" fill="white" />
-                  <circle cx="256" cy="384" r="64" fill="black" />
-                </svg>
               <h3 className="font-headline text-2xl text-foreground">上傳您的照片</h3>
               <p>將圖片拖放到此處，或點擊以選擇檔案。</p>
               <p className="text-xs">(您的圖片是私密的，不會被儲存)</p>
