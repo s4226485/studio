@@ -81,8 +81,8 @@ const FaceUpload = ({ onImageUpload, onAnalyze, isLoading }: FaceUploadProps) =>
                 className="h-40 w-40 text-foreground opacity-20"
                 fill="currentColor"
                >
-                  <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"/>
-                  <path d="M12 4a8 8 0 0 0 0 16c4.41 0 8-3.59 8-8s-3.59-8-8-8zm0 10a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/>
+                <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zM12 4a8 8 0 0 1 0 16A8 8 0 0 1 4 12 8 8 0 0 1 12 4z" />
+                <path d="M12 4a5 5 0 0 0 0 10 5 5 0 0 0 0-10zm0 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4z" />
                </svg>
               <h3 className="font-headline text-2xl text-foreground">上傳您的照片</h3>
               <p>將圖片拖放到此處，或點擊以選擇檔案。</p>
