@@ -13,7 +13,7 @@ const Header: FC = () => {
           className="h-8 w-8 text-primary"
         >
           <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zM12 4a8 8 0 1 1 0 16 4 4 0 0 0 0-8 4 4 0 0 1 0-8z" />
-          <circle cx="12" cy="7" r="1.5" fill="black" />
+          <circle cx="12" cy="7" r="1.5" fill="currentColor" />
           <circle cx="12" cy="17" r="1.5" fill="white" />
         </svg>
         <h1 className="font-headline text-4xl font-bold text-primary">
