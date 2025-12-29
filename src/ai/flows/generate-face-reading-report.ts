@@ -88,8 +88,8 @@ You are an AI expert in traditional Chinese face reading, strictly adhering to t
     ### 💡 Master's Advice
     (Provide 3 actionable pieces of advice based on the analysis to enhance strengths and mitigate weaknesses.)
 
-2.  **Invalid Image:** If the image is unclear, not a front-facing human face, or of poor quality, you MUST return a single line of text in this exact format:
-    {"report": "ERROR: 氣場干擾嚴重，大師無法感應，請施主上傳清晰照片 (The spiritual connection is weak. Please provide a clear, well-lit, front-facing photo for an accurate reading.)"}
+2.  **Invalid Image:** If the image is unclear, not a front-facing human face, of poor quality, or contains anything other than a single person's face, you MUST return a single line of text in this exact format:
+    {"report": "ERROR: 氣場干擾嚴重，大師無法感應，請施主上傳清晰、單人正面照片。 (The spiritual connection is weak. Please provide a clear, well-lit, front-facing photo of a single person for an accurate reading.)"}
 
 ---
 Analyze the user's uploaded image.
@@ -106,7 +106,15 @@ const generateFaceReadingReportFlow = ai.defineFlow(
     outputSchema: GenerateFaceReadingReportOutputSchema,
   },
   async input => {
-    const {output} = await prompt(input);
-    return output!;
+    try {
+      const {output} = await prompt(input);
+      if (!output || !output.report) {
+         return { report: "ERROR: 模型分析結果為空，請稍後再試。 (The analysis returned an empty result. Please try again later.)" };
+      }
+      return output;
+    } catch (e) {
+      console.error("Face reading flow failed", e);
+      return { report: "ERROR: 分析流程遭遇非預期錯誤，請檢查圖片或稍後再試。 (The analysis process encountered an unexpected error. Please check the image or try again later.)" };
+    }
   }
 );

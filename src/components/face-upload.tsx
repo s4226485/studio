@@ -43,15 +43,18 @@ const FaceUpload = ({ onImageUpload, onAnalyze, isLoading }: FaceUploadProps) =>
           canvas.width = width;
           canvas.height = height;
           const ctx = canvas.getContext('2d');
-          ctx?.drawImage(img, 0, 0, width, height);
+          if (!ctx) return;
+          ctx.drawImage(img, 0, 0, width, height);
 
-          // Get the data URL with JPEG format and quality 0.95
           const dataUrl = canvas.toDataURL('image/jpeg', 0.95);
           
           setPreview(dataUrl);
           onImageUpload(dataUrl);
         };
-        img.src = e.target?.result as string;
+        const result = e.target?.result;
+        if (typeof result === 'string') {
+          img.src = result;
+        }
       };
       reader.readAsDataURL(file);
     }
@@ -103,12 +106,15 @@ const FaceUpload = ({ onImageUpload, onAnalyze, isLoading }: FaceUploadProps) =>
             <Image src={preview} alt="面部預覽" fill style={{ objectFit: 'contain' }} className="rounded-lg" />
           ) : (
             <div className="text-center text-muted-foreground flex flex-col items-center gap-4">
-              <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 24 24" fill="currentColor" className="h-24 w-24 text-primary">
-                <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8c4.41 0 8 3.59 8 8s-3.59 8-8 8z"/>
-                <path d="M12 4a8 8 0 0 1 0 16V4z" fill="white"/>
-                <circle cx="12" cy="7" r="1.5" fill="currentColor" />
-                <circle cx="12" cy="17" r="1.5" fill="white" />
+              <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" className="h-24 w-24 text-primary">
+                <path d="M12 2a10 10 0 1 0 10 10" />
+                <path d="M12 2a10 10 0 1 0 0 20" />
+                <path d="M12 2a10 10 0 1 1 0 20" />
+                <path d="M12 12a5 5 0 0 0 5-5" />
+                <path d="M12 2a10 10 0 0 0 0 20V2z" />
+                <circle cx="12" cy="7" r="1" fill="currentColor" stroke="none" />
               </svg>
+
               <h3 className="font-headline text-2xl text-foreground">上傳您的照片</h3>
               <p>將圖片拖放到此處，或點擊以選擇檔案。</p>
               <p className="text-xs">(您的圖片是私密的，不會被儲存)</p>

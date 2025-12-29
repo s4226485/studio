@@ -35,33 +35,45 @@ export default function Home() {
     setCharms(null);
 
     try {
-      // 1. Generate Face Reading Report
       const reportOutput: GenerateFaceReadingReportOutput = await generateFaceReadingReport({ image: imageData });
-      if (!reportOutput.report) {
-        throw new Error("無法生成面相報告。");
+      
+      if (!reportOutput || !reportOutput.report) {
+        throw new Error("無法生成面相報告，回傳結果為空。");
       }
       
       if (reportOutput.report.startsWith('ERROR:')) {
+        // Display model-generated error directly in the report area
         setReport(reportOutput.report);
         setIsLoading(false);
         return;
       }
       setReport(reportOutput.report);
 
-      // 2. Provide Personalized Advice
-      const adviceOutput: PersonalizedAdviceOutput = await providePersonalizedAdvice({ faceReadingReport: reportOutput.report });
-      setAdvice(adviceOutput.advice);
+      // These can run in parallel
+      const [adviceResult, charmsResult] = await Promise.allSettled([
+        providePersonalizedAdvice({ faceReadingReport: reportOutput.report }),
+        suggestLuckyCharms({ faceReadingAnalysis: reportOutput.report })
+      ]);
 
-      // 3. Suggest Lucky Charms
-      const charmsOutput: SuggestLuckyCharmsOutput = await suggestLuckyCharms({ faceReadingAnalysis: reportOutput.report });
-      setCharms(charmsOutput.luckyCharms);
+      if (adviceResult.status === 'fulfilled') {
+        setAdvice(adviceResult.value.advice);
+      } else {
+        console.warn("取得建議失敗:", adviceResult.reason);
+      }
+      
+      if (charmsResult.status === 'fulfilled') {
+        setCharms(charmsResult.value.luckyCharms);
+      } else {
+        console.warn("取得開運物失敗:", charmsResult.reason);
+      }
 
     } catch (error) {
-      console.error("分析失敗:", error);
+      console.error("分析流程失敗:", error);
       const errorMessage = error instanceof Error ? error.message : "發生未知錯誤。";
+      // Use toast for unexpected system/network errors
       toast({
         title: "分析失敗",
-        description: `無法分析圖片。 ${errorMessage}`,
+        description: `發生非預期錯誤: ${errorMessage}`,
         variant: "destructive",
       });
     } finally {
