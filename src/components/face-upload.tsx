@@ -20,10 +20,38 @@ const FaceUpload = ({ onImageUpload, onAnalyze, isLoading }: FaceUploadProps) =>
   const handleFileChange = (file: File | null) => {
     if (file && file.type.startsWith('image/')) {
       const reader = new FileReader();
-      reader.onloadend = () => {
-        const base64String = reader.result as string;
-        setPreview(base64String);
-        onImageUpload(base64String);
+      reader.onload = (e) => {
+        const img = document.createElement('img');
+        img.onload = () => {
+          const canvas = document.createElement('canvas');
+          const MAX_WIDTH = 1024;
+          const MAX_HEIGHT = 1024;
+          let width = img.width;
+          let height = img.height;
+
+          if (width > height) {
+            if (width > MAX_WIDTH) {
+              height *= MAX_WIDTH / width;
+              width = MAX_WIDTH;
+            }
+          } else {
+            if (height > MAX_HEIGHT) {
+              width *= MAX_HEIGHT / height;
+              height = MAX_HEIGHT;
+            }
+          }
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext('2d');
+          ctx?.drawImage(img, 0, 0, width, height);
+
+          // Get the data URL with JPEG format and quality 0.95
+          const dataUrl = canvas.toDataURL('image/jpeg', 0.95);
+          
+          setPreview(dataUrl);
+          onImageUpload(dataUrl);
+        };
+        img.src = e.target?.result as string;
       };
       reader.readAsDataURL(file);
     }
@@ -75,9 +103,10 @@ const FaceUpload = ({ onImageUpload, onAnalyze, isLoading }: FaceUploadProps) =>
             <Image src={preview} alt="面部預覽" fill style={{ objectFit: 'contain' }} className="rounded-lg" />
           ) : (
             <div className="text-center text-muted-foreground flex flex-col items-center gap-4">
-              <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 24 24" fill="currentColor" className="h-24 w-24 text-foreground">
-                <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zM12 4a8 8 0 1 1 0 16 4 4 0 0 0 0-8 4 4 0 0 1 0-8z" />
-                <circle cx="12" cy="7" r="1.5" fill="black" />
+              <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 24 24" fill="currentColor" className="h-24 w-24 text-primary">
+                <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8c4.41 0 8 3.59 8 8s-3.59 8-8 8z"/>
+                <path d="M12 4a8 8 0 0 1 0 16V4z" fill="white"/>
+                <circle cx="12" cy="7" r="1.5" fill="currentColor" />
                 <circle cx="12" cy="17" r="1.5" fill="white" />
               </svg>
               <h3 className="font-headline text-2xl text-foreground">上傳您的照片</h3>
